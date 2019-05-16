@@ -88,11 +88,14 @@ for file_path in glob.iglob(os.path.join(folder_path, '*.log')):
         # Extract date string from filename
         if tail[1] == '-':  # Filename in format "sensor_id-ISO 8601.log"
             datepart = tail.split('-', 1)[1][:-4]
+            sensor_id = tail.split('-')[0]
         else:  # Filename in format "ISO 8601.log"
             datepart = tail[:-4]
+            sensor_id = '1'
         file_list[tail[:-4]] = {
             'filename': tail,
             'path': file_path,
+            'sensor_id': sensor_id,
             'date': datetime.strptime(datepart, '%Y-%m-%dT%H:%M:%S')
         }
 
@@ -113,7 +116,8 @@ max_file_date = datetime.utcfromtimestamp(0)
 # Upload log files to S3
 for key, file_info in file_list.items():
     dt = file_info['date']
-    object_name = 'input/' + dt.strftime('%Y/%m/%d/%H.csv')
+    object_name = 'input/' + dt.strftime('%Y/%m/%d/') + file_info['sensor_id']
+    object_name += dt.strftime('-%H.csv')
     success = upload_file(file_info['path'], sensor_config.bucket_name, object_name)
     if not success:
         print('Unable to upload ' + file_info['filename'] + ' to S3!')

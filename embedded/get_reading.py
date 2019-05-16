@@ -65,7 +65,7 @@ elif SENSOR_TYPE == 'DHT11':
         retries = 0
         while humidity_value == 0 and retries <= DHT11_RETRIES:
             result = instance.read()
-            humidity_value = result.humidity_value
+            humidity_value = result.humidity
             temperature_value = result.temperature
             retries += 1
             if humidity_value == 0:
