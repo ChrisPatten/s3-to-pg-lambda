@@ -1,0 +1,10 @@
+BASE_DIR=/home/chris
+SENSOR_ID=0
+* * * * * ${BASE_DIR}/get_reading.py >> ${BASE_DIR}/logs/${SENSOR_ID}-`date --utc +\%Y-\%m-\%dT\%H:00:00`.log 2>&1
+* * * * * sleep 10 ; ${BASE_DIR}/get_reading.py >> ${BASE_DIR}/logs/${SENSOR_ID}-`date --utc +\%Y-\%m-\%dT\%H:00:00`.log 2>&1
+* * * * * sleep 20 ; ${BASE_DIR}/get_reading.py >> ${BASE_DIR}/logs/${SENSOR_ID}-`date --utc +\%Y-\%m-\%dT\%H:00:00`.log 2>&1
+* * * * * sleep 30 ; ${BASE_DIR}/get_reading.py >> ${BASE_DIR}/logs/${SENSOR_ID}-`date --utc +\%Y-\%m-\%dT\%H:00:00`.log 2>&1
+* * * * * sleep 40 ; ${BASE_DIR}/get_reading.py >> ${BASE_DIR}/logs/${SENSOR_ID}-`date --utc +\%Y-\%m-\%dT\%H:00:00`.log 2>&1
+* * * * * sleep 50 ; ${BASE_DIR}/get_reading.py >> ${BASE_DIR}/logs/${SENSOR_ID}-`date --utc +\%Y-\%m-\%dT\%H:00:00`.log 2>&1
+@reboot screen -S 'temp server' -d -m ${BASE_DIR}/temp_server.py
+1 * * * * ${BASE_DIR}/upload_files.py -p ${BASE_DIR}/logs 2>&1
