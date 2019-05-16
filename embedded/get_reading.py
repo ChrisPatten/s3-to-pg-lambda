@@ -75,6 +75,6 @@ elif SENSOR_TYPE == 'DHT11':
 
     humidity, temp = read_dht11()
 
-curr_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+curr_time = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
 
 print("{0},{1},{2:3.3f},{3},{4}".format(curr_time, SENSOR_ID, temp, humidity, uuid.uuid4()))
