@@ -102,15 +102,16 @@ def process_readings_file(file_path):
             # Define that the timezone of the datetime is UTC
             dt = dt.replace(tzinfo=timezone.utc)
             # Get sunrise and sunset time for this location on the reading date
-            s = sunrise.sun(lat=STATION_LAT,long=STATION_LON)
-            s_rise = datetime.combine(dt.date(), 
-                                      s.sunrise(when=dt)
-                                     ).replace(tzinfo=timezone.utc)
-            s_set = datetime.combine(dt.date(), 
-                                      s.sunset(when=dt)
-                                    ).replace(tzinfo=timezone.utc)
+            #s = sunrise.sun(lat=STATION_LAT,long=STATION_LON)
+            #s_rise = datetime.combine(dt.date(), 
+            #                          s.sunrise(when=dt)
+            #                         ).replace(tzinfo=timezone.utc)
+            #s_set = datetime.combine(dt.date(), 
+            #                          s.sunset(when=dt)
+            #                        ).replace(tzinfo=timezone.utc)
             # Calculate minutes of sunlight
-            sun_mins = 0.0 if dt > s_set else round((dt - s_rise).total_seconds() / 60.0, 2)
+            #sun_mins = 0.0 if dt > s_set else round((dt - s_rise).total_seconds() / 60.0, 2)
+            sun_mins = 0
             # Add reading to main list
             reading = (
                 str(dt), # datetime

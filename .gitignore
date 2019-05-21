@@ -4,3 +4,4 @@ deploy.zip
 test_data
 rds_config.py
 embedded/sensor_config.py
+__pycache__/
